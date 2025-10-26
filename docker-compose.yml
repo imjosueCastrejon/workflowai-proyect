@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # --- El Servicio del Backend ---
+  backend:
+    # 1. Le dice a Compose que construya este servicio
+    #    usando el Dockerfile de la carpeta './workflow-ai-backend'
+    build: ./workflow-ai-backend
+    ports:
+      # 2. Mapea el puerto 8000 de la MÁQUINA (host)
+      #    al puerto 8000 DENTRO del contenedor.
+      - "8000:8000"
+    volumes:
+      # 3. ¡MUY IMPORTANTE! Esto "monta" el archivo de base de datos
+      #    local dentro del contenedor. Sin esto, tu base de datos
+      #    se borraría cada vez que reinicies el contenedor.
+      - ./workflow-ai-backend/database.db:/app/database.db
+    env_file:
+      - ./workflow-ai-backend/.env
+
+  # --- El Servicio del Frontend ---
+  frontend:
+    build: ./workflow-ai-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      # 4. Aquí define las variables de entorno que
+      #    el código de Next.js usará DENTRO de Docker.
+
+      # Para los Componentes de Servidor (se ejecuta en el contenedor)
+      API_URL: http://backend:8000
+
+      # Para los Componentes de Cliente (se ejecuta en el navegador)
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    depends_on:
+      # 5. Le dice a Docker que inicie el 'backend'
+      #    antes de iniciar el 'frontend'.
+      - backend
+
+# --- Servicio de n8n --- #
+  n8n:
+    image: n8nio/n8n:nightly
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n # Usamos un volumen "nombrado"
+    environment:
+      # Opcional, pero buena práctica
+      - GENERIC_TIMEZONE=America/Mexico_City 
+
+# --- NUEVA SECCIÓN: Volúmenes ---
+# Esto le dice a Docker que cree un "disco duro" persistente
+# para n8n, para que no perder los flujos.
+volumes:
+  n8n_data:

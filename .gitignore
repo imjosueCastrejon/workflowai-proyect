@@ -1,0 +1,43 @@
+# --- Python/Backend ---
+
+# Entorno virtual
+/workflow-ai-backend/venv/
+
+# Cache de Python
+/workflow-ai-backend/__pycache__/
+*.pyc
+
+# El archivo de la base de datos (no se suben los datos, solo el código)
+/workflow-ai-backend/database.db
+
+# ¡¡MÁS IMPORTANTE!! ¡Nunca se suben claves de API!
+/workflow-ai-backend/.env
+
+
+# --- Node.js/Frontend --- #
+
+# Dependencias (se reinstalan con 'pnpm install')
+/workflow-ai-frontend/node_modules/
+
+# Archivos de build de Next.js (se generan con 'pnpm run build')
+/workflow-ai-frontend/.next/
+
+# Variables de entorno locales del frontend
+/workflow-ai-frontend/.env.local
+
+# Logs
+/workflow-ai-frontend/npm-debug.log*
+/workflow-ai-frontend/yarn-debug.log*
+/workflow-ai-frontend/yarn-error.log*worjwork
+
+
+# --- OS y Editor ---
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# n8n (no subir los datos del volumen de docker)
+.n8n/
