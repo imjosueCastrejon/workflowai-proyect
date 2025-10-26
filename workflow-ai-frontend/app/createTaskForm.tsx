@@ -66,25 +66,28 @@ export function CreateTaskForm() {
 
     // 8. El JSX (HTML) del formulario
     return (
-        <form onSubmit={handleSubmit} className="mb-6 p-4 bg-gray-100 rounded-lg">
-            <h2 className="text-xl font-semibold mb-3">Crear Nueva Tarea</h2>
+        <form onSubmit={handleSubmit} className="mb-6 p-8 bg-[#0f1527] rounded-lg w-full">
             <div className="flex flex-col gap-3">
+                <label htmlFor="title" className="text-gray-300">Titulo de la tarea</label>
                 <input
+                    name="title"
                     type="text"
-                    placeholder="Título"
+                    placeholder="Ej., Terminar endpoints"
                     value={title} // 'value' bindea el estado al input (One-way)
                     onChange={(e) => setTitle(e.target.value)} // 'onChange' actualiza el estado (Two-way)
-                    className="p-2 border rounded"
+                    className="p-2 border rounded mb-3"
                 />
+                <label htmlFor="description" className="text-gray-300">Descripción (opcional)</label>
                 <textarea
-                    placeholder="Descripción (opcional)"
+                    name="description"
+                    placeholder="Agrega mas detalles sobre la tarea"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="p-2 border rounded"
                 />
                 <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="px-4 py-2 bg-[#0d5288] text-white rounded hover:bg-blue-700"
                 >
                     Crear Tarea
                 </button>
