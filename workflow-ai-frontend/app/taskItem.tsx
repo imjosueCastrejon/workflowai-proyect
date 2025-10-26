@@ -68,7 +68,7 @@ export function TaskItem({ task }: TaskItemProps) {
 
     // 8. El JSX
     return (
-        <div className="p-4 border rounded-lg shadow-sm bg-white flex justify-between items-center">
+        <div className="bg-[#0f1527] p-4 border rounded-lg shadow-sm flex justify-between items-center">
             <div>
                 <h2 className="text-xl font-semibold">{task.title}</h2>
                 <p className="text-gray-700">{task.description}</p>
@@ -88,7 +88,7 @@ export function TaskItem({ task }: TaskItemProps) {
                     disabled={!task.description || !!task.ai_summary}
                     className={`px-3 py-1 text-white rounded text-sm ${!task.description || !!task.ai_summary
                             ? 'bg-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 hover:bg-blue-600'
+                            : 'bg-[#0d5288] hover:bg-blue-600'
                         }`}
                 >
                     {task.ai_summary ? 'Analizada' : 'Analizar IA'}
